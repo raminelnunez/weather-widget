@@ -14,6 +14,7 @@ if (!navigator.geolocation) {
 		lon = position.coords.longitude;
     console.log(lat, lon);
     getCurrentWeather();
+    getWeeklyWeather();
 	});
 }
 
@@ -25,9 +26,16 @@ function getCurrentWeather() {
   return fetch(`${baseURL}weather?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
   .then((data) => currentWeather = new CurrentWeather(
-    `http://openweathermap.org/img/wn/ ${data.weather[0].icon}@2x.png`, data.main.temp, data.weather[0].description))
+    `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`, data.main.temp, data.weather[0].description))
   .then(console.log(currentWeather))
 }
+
+function getForecast() {
+  return fetch(`${baseURL}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+}
+
 
 class CurrentWeather {
   constructor(imageURL, temperature, description) {
