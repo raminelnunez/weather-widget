@@ -75,3 +75,28 @@ class DailyWeather {
   }
 }
 
+function render() {
+  html.currrentConditions.innerHTML = "";
+  html.currrentConditions.insertAdjacentHTML('afterbegin', `
+  <h2>Current Conditions</h2>
+  <img src="${currentWeather.image}" />
+  <div class="current">
+    <div class="temp">${currentWeather.temp - kelvin}℃</div>
+    <div class="condition">${currentWeather.desc}</div>
+  </div>
+  `)
+
+  html.forecast.innerHTML = "";
+  weeklyWeather.forEach((day) => {
+    html.forecast.insertAdjacentHTML('afterbegin', `
+    <div class="day">
+      <h3>${day.day}</h3>
+      <img src="${day.image}" />
+      <div class="description">${day.desc}</div>
+      <div class="temp">
+        <span class="high">${day.maxTemp - kelvin}℃</span>/<span class="low">${day.minTemp - kelvin}℃</span>
+      </div>
+    </div>
+    `)
+  })
+}
