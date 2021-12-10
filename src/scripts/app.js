@@ -4,6 +4,7 @@ const kelvin = 273.15;
 const date = new Date();
 const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 let currentWeather;
+const weeklyWeather = [];
 
 let lat;
 let lon;
@@ -36,21 +37,19 @@ function getForecast() {
   return fetch(`${baseURL}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
   .then((data) => parseForecast(data.list, 7))
-  .then((data) => console.log(data))
+  .then(() => console.log(weeklyWeather))
 }
 
 function parseForecast(array, howMany) {
-  const weeklyWeather = [];
   for (let i = 1; i < howMany; i++) {
     let dailyWeather = new DailyWeather(week[date.getDay() - 1 + i],
       `http://openweathermap.org/img/wn/${array[i].weather[0].icon}@2x.png`,
       array[i].weather[0].description,
       array[i].main.temp_max,
       array[i].main.temp_min
-    );
+    )
     weeklyWeather.push(dailyWeather);
   }
-  return weeklyWeather;
 }
 
 class CurrentWeather {
