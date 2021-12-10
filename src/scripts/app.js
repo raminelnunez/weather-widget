@@ -27,14 +27,14 @@ function getCurrentWeather() {
   .then((response) => response.json())
   .then((data) => currentWeather = new CurrentWeather(
     `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`, data.main.temp, data.weather[0].description))
-  .then(console.log(currentWeather))
+  .then((data) => console.log(data))
 }
 
 function getForecast() {
   return fetch(`${baseURL}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
-  .then((data) => parseForecast(data.list))
-  .then((data) => console.log(data));
+  .then((data) => parseForecast(data.list, 7))
+  .then((data) => console.log(data))
 }
 
 function parseForecast(array, howMany) {
