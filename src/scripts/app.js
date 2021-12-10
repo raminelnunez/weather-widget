@@ -24,3 +24,20 @@ function getWeather() {
   .then((response) => response.json())
   .then((data) => console.log(data.main))
 }
+
+class CurrentWeather {
+  constructor(imageURL, temperature, description) {
+    this.image = imageURL;
+    this.temp = temperature;
+    this.desc = description;
+  }
+}
+
+class DailyWeather {
+  constructor(imageURl, description, maxTemperature, minTemperature) {
+    this.image = imageURl;
+    this.desc = description;
+    this.maxTemp = maxTemperature;
+    this.minTemp = minTemperature;
+  }
+}
