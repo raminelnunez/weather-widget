@@ -10,7 +10,8 @@ if (!navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition((position) => {
 		lat = position.coords.latitude;
 		lon = position.coords.longitude;
-    console.log(lat, lon)
+    console.log(lat, lon);
+    getWeather();
 	});
 }
 
@@ -18,3 +19,8 @@ const getCoords = () => {
   return [lat, lon];
 }
 
+function getWeather() {
+  return fetch(`${baseURL}weather?lat=${lat}&lon=${lon}&appid=${apiKey}`)
+  .then((response) => response.json())
+  .then((data) => console.log(data.main))
+}
