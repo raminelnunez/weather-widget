@@ -1,7 +1,6 @@
 let lat;
 let lon;
 
-
 if (!navigator.geolocation) {
 	console.log('Geolocation is not supported by your browser');
 } else {
@@ -10,4 +9,8 @@ if (!navigator.geolocation) {
 		lon = position.coords.longitude;
 		console.log(lat, lon);
 	});
+}
+
+const getCoords = () => {
+  return [lat, lon];
 }
