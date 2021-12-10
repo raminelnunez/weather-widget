@@ -1,3 +1,4 @@
+const baseURL = 'api.openweathermap.org/data/2.5/'
 const apiKey = 'a230cd15bf0b29b71caeacb711a2ada6';
 
 let lat;
