@@ -6,6 +6,11 @@ const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 
 let currentWeather;
 const weeklyWeather = [];
 
+const html = {
+  currrentConditions: document.getElementsByClassName('current-conditions')[0],
+  forecast: document.getElementsByClassName('forecast')[0]
+}
+
 let lat;
 let lon;
 
