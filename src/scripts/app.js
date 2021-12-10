@@ -1,6 +1,7 @@
 const baseURL = 'http://api.openweathermap.org/data/2.5/'
 const apiKey = 'a230cd15bf0b29b71caeacb711a2ada6';
 const kelvin = 273.15;
+
 let currentWeather;
 
 let lat;
@@ -39,7 +40,7 @@ function getForecast() {
 
 function parseForecast(array, howMany) {
   const weeklyWeather = [];
-  for (let i = 0; i < howMany; i++) {
+  for (let i = 1; i < howMany; i++) {
     let dailyWeather = new DailyWeather(
       `http://openweathermap.org/img/wn/${array[i].weather[0].icon}@2x.png`,
       array[i].weather[0].description,
