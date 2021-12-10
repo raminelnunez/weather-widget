@@ -14,7 +14,7 @@ if (!navigator.geolocation) {
 		lon = position.coords.longitude;
     console.log(lat, lon);
     getCurrentWeather();
-    getWeeklyWeather();
+    getForecast();
 	});
 }
 
@@ -33,9 +33,23 @@ function getCurrentWeather() {
 function getForecast() {
   return fetch(`${baseURL}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
-  .then((data) => console.log(data))
+  .then((data) => parseForecast(data.list))
+  .then((data) => console.log(data));
 }
 
+function parseForecast(array, howMany) {
+  const weeklyWeather = [];
+  for (let i = 0; i < howMany; i++) {
+    let dailyWeather = new DailyWeather(
+      `http://openweathermap.org/img/wn/${array[i].weather[0].icon}@2x.png`,
+      array[i].weather[0].description,
+      array[i].main.temp_max,
+      array[i].main.temp_min
+    );
+    weeklyWeather.push(dailyWeather);
+  }
+  return weeklyWeather;
+}
 
 class CurrentWeather {
   constructor(imageURL, temperature, description) {
