@@ -40,7 +40,7 @@ function getCurrentWeather() {
 function getForecast() {
   return fetch(`${baseURL}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
-  .then((data) => parseForecast(data.list, 7))
+  .then((data) => parseForecast(data.list, 6))
   .then(() => console.log(weeklyWeather))
   .then(() => render(currentWeather, weeklyWeather));
 }
