@@ -1,4 +1,4 @@
-const baseURL = 'api.openweathermap.org/data/2.5/'
+const baseURL = 'http://api.openweathermap.org/data/2.5/'
 const apiKey = 'a230cd15bf0b29b71caeacb711a2ada6';
 
 let lat;
@@ -10,10 +10,11 @@ if (!navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition((position) => {
 		lat = position.coords.latitude;
 		lon = position.coords.longitude;
-		console.log(lat, lon);
+    console.log(lat, lon)
 	});
 }
 
 const getCoords = () => {
   return [lat, lon];
 }
+
