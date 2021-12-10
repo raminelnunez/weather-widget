@@ -1,5 +1,6 @@
 const baseURL = 'http://api.openweathermap.org/data/2.5/'
 const apiKey = 'a230cd15bf0b29b71caeacb711a2ada6';
+const kelvin = 273.15;
 
 let lat;
 let lon;
@@ -41,3 +42,4 @@ class DailyWeather {
     this.minTemp = minTemperature;
   }
 }
+
