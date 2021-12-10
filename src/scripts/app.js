@@ -2,7 +2,7 @@ const baseURL = 'http://api.openweathermap.org/data/2.5/'
 const apiKey = 'a230cd15bf0b29b71caeacb711a2ada6';
 const kelvin = 273.15;
 const date = new Date();
-const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 let currentWeather;
 
 let lat;
@@ -42,7 +42,7 @@ function getForecast() {
 function parseForecast(array, howMany) {
   const weeklyWeather = [];
   for (let i = 1; i < howMany; i++) {
-    let dailyWeather = new DailyWeather(
+    let dailyWeather = new DailyWeather(week[date.getDay() - 1 + i],
       `http://openweathermap.org/img/wn/${array[i].weather[0].icon}@2x.png`,
       array[i].weather[0].description,
       array[i].main.temp_max,
@@ -62,7 +62,8 @@ class CurrentWeather {
 }
 
 class DailyWeather {
-  constructor(imageURl, description, maxTemperature, minTemperature) {
+  constructor(day, imageURl, description, maxTemperature, minTemperature) {
+    this.day = day;
     this.image = imageURl;
     this.desc = description;
     this.maxTemp = maxTemperature;
