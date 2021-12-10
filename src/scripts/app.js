@@ -34,8 +34,7 @@ function getCurrentWeather() {
   return fetch(`${baseURL}weather?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
   .then((data) => currentWeather = new CurrentWeather(
-    `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`, data.main.temp, data.weather[0].description))
-  .then((data) => console.log(data))
+    `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`, data.main.temp, data.weather[0].description));
 }
 
 function getForecast() {
@@ -43,11 +42,12 @@ function getForecast() {
   .then((response) => response.json())
   .then((data) => parseForecast(data.list, 7))
   .then(() => console.log(weeklyWeather))
+  .then(() => render(currentWeather, weeklyWeather));
 }
 
 function parseForecast(array, howMany) {
   for (let i = 1; i < howMany; i++) {
-    let dailyWeather = new DailyWeather(week[date.getDay() - 1 + i],
+    let dailyWeather = new DailyWeather(week[date.getDay() -1 + i],
       `http://openweathermap.org/img/wn/${array[i].weather[0].icon}@2x.png`,
       array[i].weather[0].description,
       array[i].main.temp_max,
@@ -75,26 +75,26 @@ class DailyWeather {
   }
 }
 
-function render() {
+function render(currentWeather, weeklyWeather) {
   html.currrentConditions.innerHTML = "";
   html.currrentConditions.insertAdjacentHTML('afterbegin', `
   <h2>Current Conditions</h2>
   <img src="${currentWeather.image}" />
   <div class="current">
-    <div class="temp">${currentWeather.temp - kelvin}℃</div>
+    <div class="temp">${(currentWeather.temp - kelvin).toFixed(0)}℃</div>
     <div class="condition">${currentWeather.desc}</div>
   </div>
   `)
 
   html.forecast.innerHTML = "";
   weeklyWeather.forEach((day) => {
-    html.forecast.insertAdjacentHTML('afterbegin', `
+    html.forecast.insertAdjacentHTML('beforeend', `
     <div class="day">
       <h3>${day.day}</h3>
       <img src="${day.image}" />
       <div class="description">${day.desc}</div>
       <div class="temp">
-        <span class="high">${day.maxTemp - kelvin}℃</span>/<span class="low">${day.minTemp - kelvin}℃</span>
+        <span class="high">${(day.maxTemp - kelvin).toFixed(0)}℃</span>/<span class="low">${(day.minTemp - kelvin).toFixed(0)}℃</span>
       </div>
     </div>
     `)
