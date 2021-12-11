@@ -1,5 +1,8 @@
+const form = document.getElementsByTagName('form')[0];
+const button = document.getElementsByTagName('button')[0];
+
 const baseURL = 'http://api.openweathermap.org/data/2.5/';
-const apiKey = 'a230cd15bf0b29b71caeacb711a2ada6';
+let apiKey;
 const kelvin = 273.15;
 const date = new Date();
 const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -20,8 +23,6 @@ if (!navigator.geolocation) {
 	navigator.geolocation.getCurrentPosition((position) => {
 		lat = position.coords.latitude;
 		lon = position.coords.longitude;
-    getCurrentWeather();
-    getForecast();
 	});
 };
 
@@ -33,14 +34,16 @@ function getCurrentWeather() {
   return fetch(`${baseURL}weather?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
   .then((data) => currentWeather = new CurrentWeather(
-    data.weather[0].icon, data.main.temp, data.weather[0].description));
+    data.weather[0].icon, data.main.temp, data.weather[0].description))
+    .catch(() => alert(`Please Enter Valid Key`))
+    .then(() => document.getElementById('text-input').value = "")
 };
 
 function getForecast() {
   return fetch(`${baseURL}forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`)
   .then((response) => response.json())
   .then((data) => parseForecast(data.list))
-  .then(() => render(currentWeather, weeklyWeather))
+  .then(() => render(currentWeather, weeklyWeather));
 };
 
 function parseForecast(array) {
@@ -75,7 +78,6 @@ function parseForecast(array) {
       }
     }
     let icon = day[parseInt((day.length/2).toFixed(0))].weather[0].icon;
-    console.log(icon)
     let description = day[parseInt((day.length/2).toFixed(0))].weather[0].description;
     weeklyWeather.push(new DailyWeather(week[weekDayInt], dateInt, icon, description, maxTemp, minTemp))
   }
@@ -124,4 +126,34 @@ function render(currentWeather, weeklyWeather) {
     </div>
     `);
   });
+  html.forecast.insertAdjacentHTML('afterend', `
+    <img id="the-thing" src="https://c.tenor.com/CWgfFh7ozHkAAAAC/rick-astly-rick-rolled.gif">
+  `)
 };
+
+function keyEntered(e) {
+  e.preventDefault();
+  let key = document.getElementById('text-input').value;
+  if (lat === undefined) {
+    alert('Please Enable Location')
+    return;
+  }
+  if (key === undefined) {
+    alert('Please Enter Key')
+    return;
+  }
+  runApp(key);
+}
+
+function runApp(key) {
+  apiKey = key;
+    getCurrentWeather();
+    getForecast();
+}
+
+form.addEventListener('submit', keyEntered)
+button.addEventListener('click', () => navigator.geolocation.getCurrentPosition((position) => {
+  lat = position.coords.latitude;
+  lon = position.coords.longitude;
+}));
+

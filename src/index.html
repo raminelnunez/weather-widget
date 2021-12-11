@@ -4,12 +4,29 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@200;400;600&display=swap" rel="stylesheet">
     <title>Weather</title>
     <script src="./scripts/app.js" defer></script>
   </head>
   <body>
     <main>
-      <div class="current-conditions"> 
+      <div class="current-conditions">
+        <div id="enter-key">
+          <h1>Important: Enable Browser Location!</h1>
+          <button>Click Here To Enable Location</button>
+          <form>
+            <input type="text" id="text-input" placeholder="ENTER KEY">
+          </form>
+          <p>If you don't have a key sign up and get one at:</p>
+          <h4>https://openweathermap.org/api</h4>
+          <p>You'll Need To Suscribe to:</p>
+          <ul>
+            <li>Current Weather Data</li>
+            <li>5 Day / 3 Hour Forecast</li>
+          </ul>
+        </div>
       </div>
       <div class="forecast">
       </div>

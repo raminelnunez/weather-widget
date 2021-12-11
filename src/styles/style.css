@@ -3,7 +3,8 @@
 }
 
 body {
-  font-family: verdana;
+  font-family: 'Readex Pro', sans-serif;
+  background-color: burlywood;
 }
 
 main {
@@ -46,6 +47,7 @@ h2, h3 {
 }
 
 .day {
+  background-color: floralwhite;
   text-align: center;
   min-width: 120px;
   width: 20%;  
@@ -86,4 +88,32 @@ h2, h3 {
 
 .high {
   color: #d33606;
+}
+
+#enter-key {
+  margin: auto;
+  background-color: crimson;
+  padding: 10rem;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+#enter-key p h4 li h1 button {
+  font-weight: 400;
+}
+
+button {
+  margin: 2rem;
+}
+
+#the-thing {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-top: 5rem;
 }
