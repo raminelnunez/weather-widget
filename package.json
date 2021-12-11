@@ -1,0 +1,31 @@
+{
+  "name": "sd130-learning",
+  "version": "1.0.0",
+  "description": "we're learning about git and npm and gulp in SD130",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cmacmitt/sd130-learning-git.git"
+  },
+  "author": "Chris MacDonald",
+  "bugs": {
+    "url": "https://github.com/cmacmitt/sd130-learning-git/issues"
+  },
+  "homepage": "https://github.com/cmacmitt/sd130-learning-git#readme",
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "dayjs": "^1.10.7",
+    "gulp-sourcemaps": "^3.0.0",
+    "moment": "^2.29.1"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-clean": "^0.4.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-minify": "^3.1.0"
+  }
+}
