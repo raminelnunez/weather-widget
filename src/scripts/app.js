@@ -76,7 +76,7 @@ function parseForecast(array) {
     }
     let icon = day[parseInt((day.length/2).toFixed(0))].weather[0].icon;
     console.log(icon)
-    let description = day[day.length/2].weather[0].description;
+    let description = day[parseInt((day.length/2).toFixed(0))].weather[0].description;
     weeklyWeather.push(new DailyWeather(week[weekDayInt], dateInt, icon, description, maxTemp, minTemp))
   }
 };
