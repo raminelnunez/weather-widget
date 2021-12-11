@@ -74,7 +74,8 @@ function parseForecast(array) {
         maxTemp = trihour.main.temp_max
       }
     }
-    let icon = day[day.length/2].weather[0].icon;
+    let icon = day[parseInt((day.length/2).toFixed(0))].weather[0].icon;
+    console.log(icon)
     let description = day[day.length/2].weather[0].description;
     weeklyWeather.push(new DailyWeather(week[weekDayInt], dateInt, icon, description, maxTemp, minTemp))
   }
