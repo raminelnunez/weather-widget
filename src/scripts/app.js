@@ -50,7 +50,20 @@ function parseForecast(array) {
   let dates = []
   let datesInfoArray = [[],[],[],[],[]];
   for (let i = 0; i < 5; i++) {
+    let earlyMonth = false
+    if (date.getMonth % 2 == 0 && date.getMonth != 8) {
+      earlyMonth = true;
+    }
     dates[i] = (date.getDate() + i + 1)
+    if (earlyMonth && date.getDate() + i + 1 > 30) {
+      dates[i] = (date.getDate() + i + 1) - 30;
+    }
+    if (!earlyMonth && date.getDate() + i + 1 > 31) {
+      dates[i] = (date.getDate() + i + 1) - 31;
+    }
+    if (date.getMonth == 2) {
+      dates[i] = (date.getDate() + i + 1) - 28;
+    }
   };
   
   for (let item of array) {
@@ -77,8 +90,8 @@ function parseForecast(array) {
         maxTemp = trihour.main.temp_max
       }
     }
-    let icon = day[parseInt((day.length/2).toFixed(0))].weather[0].icon;
-    let description = day[parseInt((day.length/2).toFixed(0))].weather[0].description;
+    let icon = day[4].weather[0].icon; 
+    let description = day[4].weather[0].description;
     weeklyWeather.push(new DailyWeather(week[weekDayInt], dateInt, icon, description, maxTemp, minTemp))
   }
 };
